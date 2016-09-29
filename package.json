@@ -20,6 +20,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "~2.2.14",
     "jade": "^1.11.0",
+    "pug": "^2.0.0-beta6",
     "tiny-lr": "0.0.7"
   },
   "engines": {
