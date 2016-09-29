@@ -78,6 +78,14 @@ gulp.task('views', function() {
     .pipe( gulp.dest('dist/'))
 });
 
+// Compress and minify images to reduce their file size
+gulp.task('images', function() {
+    gulp.src('app/images/**/*')
+    //.pipe(imagemin())
+    .pipe(gulp.dest('dist/images/'))
+    //.pipe(notify({ message: 'Images task complete' }));
+});
+
 
 gulp.task('watch', ['lint'], function() {
   // Start webserver
@@ -98,6 +106,9 @@ gulp.task('watch', ['lint'], function() {
   gulp.watch(['app/**/*.jade'], [
     'views'
   ]);
+
+  // If an image is modified, run our images task to compress images
+  gulp.watch('app/images/**/*', ['images']);
 
   gulp.watch('./dist/**').on('change', refresh.changed);
 
