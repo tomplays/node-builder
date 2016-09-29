@@ -1,10 +1,9 @@
 
 ## Installation
 
-    cd example-app
-
-    npm install
-
-    gulp dev
+	$ git clone git@github.com:tomplays/node-builder.git 
+    $ cd node-builder
+    $ npm install
+    $ gulp 
 
     
