@@ -8,6 +8,9 @@ rimraf      = require('gulp-rimraf'),
 sass        = require('gulp-sass'),
 autoprefixer= require('gulp-autoprefixer'),
 jade        = require('gulp-jade'),
+pug         = require('gulp-pug'),
+iconfont    = require('gulp-iconfont'),
+iconfontCss = require('gulp-iconfont-css'),
 sourcemaps  = require('gulp-sourcemaps');
 
 // Modules for webserver and livereload
@@ -29,7 +32,7 @@ server.all('/*', function(req, res) {
 });
 
 // Dev task
-gulp.task('dev', ['clean', 'views', 'styles', 'lint', 'browserify'], function() { });
+gulp.task('dev', ['clean', 'views_jade', 'views_pug', 'copyhtml', 'styles', 'lint', 'browserify'], function() { });
 
 // Clean task
 gulp.task('clean', function() {
@@ -72,9 +75,21 @@ gulp.task('browserify', function() {
 });
 
 // Views task
-gulp.task('views', function() {
+gulp.task('views_pug', function() {
+ gulp.src('app/*.pug')
+    .pipe( pug({ pretty: true }))
+    .pipe( gulp.dest('dist/'))
+});
+// Views task
+gulp.task('views_jade', function() {
  gulp.src('app/*.jade')
     .pipe( jade({ pretty: true }))
+    .pipe( gulp.dest('dist/'))
+});
+
+
+gulp.task('copyhtml', function() {
+ gulp.src('app/*.html')
     .pipe( gulp.dest('dist/'))
 });
 
@@ -86,6 +101,27 @@ gulp.task('images', function() {
     //.pipe(notify({ message: 'Images task complete' }));
 });
 
+
+
+
+
+var fontName = 'icons';
+
+gulp.task('iconfont', function(){
+  gulp.src(['app/assets/icons/*.svg'])
+    .pipe(iconfontCss({
+     fontName: fontName,
+     path: 'app/styles/'+ fontName + '.css',
+     targetPath: '../css/'+ fontName + '.css',
+     fontPath: '../fonts/',
+    }))
+    .pipe(iconfont({
+      fontName: fontName, // required 
+      prependUnicode: true, // recommended option 
+      formats: ['ttf', 'eot', 'woff'], // default, 'woff2' and 'svg' are available 
+     }))
+    .pipe(gulp.dest('dist/fonts/'));
+});
 
 gulp.task('watch', ['lint'], function() {
   // Start webserver
@@ -103,9 +139,24 @@ gulp.task('watch', ['lint'], function() {
     'styles'
   ]);
 
-  gulp.watch(['app/**/*.jade'], [
-    'views'
+  gulp.watch(['app/**/*.pug'], [
+    'views_pug'
   ]);
+   gulp.watch(['app/**/*.jade'], [
+    'views_jade'
+  ]);
+
+   gulp.watch(['app/**/*.html'], [
+    'copyhtml'
+  ]);
+  gulp.watch(['app/assets/icons/*.svg'], [
+    'iconfont'
+  ]);
+
+  
+
+
+
 
   // If an image is modified, run our images task to compress images
   gulp.watch('app/images/**/*', ['images']);
