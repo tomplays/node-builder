@@ -32,7 +32,7 @@ server.all('/*', function(req, res) {
 });
 
 // Dev task
-gulp.task('dev', ['clean', 'views_jade', 'views_pug', 'copyhtml', 'styles', 'lint', 'browserify'], function() { });
+gulp.task('dev', ['clean', 'views_jade', 'views_pug', 'copyfonts', 'copyhtml', 'styles', 'lint', 'browserify'], function() { });
 
 // Clean task
 gulp.task('clean', function() {
@@ -93,6 +93,13 @@ gulp.task('copyhtml', function() {
     .pipe( gulp.dest('dist/'))
 });
 
+
+gulp.task('copyfonts', function() {
+ gulp.src('app/fonts/*')
+    .pipe( gulp.dest('dist/fonts/'))
+});
+
+
 // Compress and minify images to reduce their file size
 gulp.task('images', function() {
     gulp.src('app/images/**/*')
@@ -133,6 +140,10 @@ gulp.task('watch', ['lint'], function() {
   // Watch our sass files
   gulp.watch(['app/styles/**/*.scss'], [
     'styles'
+  ]);
+
+   gulp.watch(['app/fonts/**/*'], [
+    'copyfonts'
   ]);
 
   gulp.watch(['app/**/*.pug'], [
