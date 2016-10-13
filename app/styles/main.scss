@@ -16,7 +16,9 @@ $gutter-width: 10px;
 @import 'devmode_';
 
 
-
+body{
+    font-family:$font-stack;
+}
 
 .container{
     float: left;
