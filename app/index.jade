@@ -1,15 +1,7 @@
-doctype html
-html(lang="fr")
-  head
-    title template
-    link(href='/css/icons.css', rel='stylesheet')
-    link(href='/css/main.css', rel='stylesheet')
-    script(src='/js/bundle.js', type='text/javascript')
+extends layout
 
-  body
-    #container.col
-     h1 hello ECV jade way
-     span.icon.icon-test
-
-
-      
+block content
+    include partials/navigation
+    include partials/top
+    include partials/about
+    include partials/contact
