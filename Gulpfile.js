@@ -82,7 +82,7 @@ gulp.task('views_pug', function() {
 });
 // Views task
 gulp.task('views_jade', function() {
- gulp.src('app/*.jade')
+ gulp.src('app/**/*.jade')
     .pipe( jade({ pretty: true }))
     .pipe( gulp.dest('dist/'))
 });
@@ -102,11 +102,7 @@ gulp.task('images', function() {
 });
 
 
-
-
-
 var fontName = 'icons';
-
 gulp.task('iconfont', function(){
   gulp.src(['app/assets/icons/*.svg'])
     .pipe(iconfontCss({
@@ -154,9 +150,6 @@ gulp.task('watch', ['lint'], function() {
   ]);
 
   
-
-
-
 
   // If an image is modified, run our images task to compress images
   gulp.watch('app/images/**/*', ['images']);
