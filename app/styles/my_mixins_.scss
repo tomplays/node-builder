@@ -1,0 +1,18 @@
+/*
+https://www.minimamente.com/example/gradient-generator/
+*/
+
+
+@mixin linear-gradient($image, $pattern, $deg, $start, $end, $opstart, $opend) {
+    background-image: 
+    linear-gradient($deg,
+      rgba($start, $opstart) 0%, 
+      rgba($end, $opend) 100%
+    ),
+    url($image),
+    url(../images/elephant_.png),
+    url(../images/s.png);
+    background-repeat:no-repeat, no-repeat, no-repeat, repeat;
+    background-position:0 0, right center, 0 bottom, 0 0;
+    background-size:auto ,20%, 30%, auto;
+}
