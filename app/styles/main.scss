@@ -1,7 +1,60 @@
-@import 'bootstrap/bootstrap.scss';
+/* @import 'bootstrap/bootstrap'; */ 
+@import 'my_bootstrap/bootstrap';
+
+
+/*http://neat.bourbon.io/*/
+/* @import 'neat/_neat'; */
+
+$font-stack: 'Noto Sans', sans-serif;
+$primary-color: #15263e;
+
+$grid-width: 1%;
+$gutter-width: 10px;
+
+
 @import 'my_mixins_';
+@import 'devmode_';
 
 
-body{
-    // @include linear-gradient('../images/css3.png', '../images/s.png',  29deg,#b6b672, #29a9df, .9, .8); 
+
+
+.container{
+    float: left;
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+}
+.wrapper{
+    width:100%;
+    margin:0 auto;
+    padding:0 20px;
+    box-sizing: border-box;
+    max-width:1240px;
+
+}
+header{
+     padding-bottom: 100px;
+     padding-top: 100px;
+     text-align:center;
+     h1{
+        color:#fff;
+        font-size:2em;
+     }
+      h2{
+     
+        color:#000;
+     }
+}
+
+@media screen and (max-width: 720px) {
+  .col-wide, .col-side{
+    width:grid-width('full');
+  }
+  
+}
+
+
+
+.efx{
+    @include linear-gradient('../images/css3.png', '../images/s.png',  29deg,#b6b672, #29a9df, .9, .8); 
 }
