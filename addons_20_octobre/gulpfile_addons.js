@@ -2,10 +2,16 @@
 
 // npm install --save gulp-replace gulp-inline-css
 // add  'styles_newsletter' 
-//at line 146 
+// at line 146 
+
  //gulp.watch(['app/styles/**/*.scss'], [
  //   'styles'
  // ]);
+
+// 
+//  add line 111
+//  .pipe(gulp.dest('newsletter/images/')) 
+
 
 
 var replace = require('gulp-replace');
