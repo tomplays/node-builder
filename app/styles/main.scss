@@ -1,21 +1,13 @@
+
 @import "commons";
 
 $font-stack: 'Noto Sans', sans-serif;
 
-
 body{
-    
-    font-family:$font-stack;
-}
-h1{
-    margin:0;
-    padding:0;
-}
-h2{}
-p{}
-
-.bg_gradient{
-  
+    font-family: $font-stack;
 }
 
-@import "responsive";
+@media screen and (max-width: 720px) { 
+    @import "small";
+}
+
