@@ -11,7 +11,9 @@ jade        = require('gulp-jade'),
 pug         = require('gulp-pug'),
 iconfont    = require('gulp-iconfont'),
 iconfontCss = require('gulp-iconfont-css'),
-sourcemaps  = require('gulp-sourcemaps');
+sourcemaps  = require('gulp-sourcemaps'),
+replace     = require('gulp-replace'),
+inlineCss   = require('gulp-inline-css');
 
 // Modules for webserver and livereload
 var express   = require('express'),
@@ -105,6 +107,7 @@ gulp.task('images', function() {
     gulp.src('app/images/**/*')
     //.pipe(imagemin())
     .pipe(gulp.dest('dist/images/'))
+    .pipe(gulp.dest('newsletter/images/')) 
     //.pipe(notify({ message: 'Images task complete' }));
 });
 
@@ -126,6 +129,35 @@ gulp.task('iconfont', function(){
     .pipe(gulp.dest('dist/fonts/'));
 });
 
+
+
+gulp.task('styles_newsletter', function() {
+  gulp.src('app/styles/newsletter.scss')
+  //  .pipe(sourcemaps.init())
+  // The onerror handler prevents Gulp from crashing when you make a mistake in your SASS
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+  // .pipe(sourcemaps.write('./maps'))
+  // Optionally add autoprefixer
+  .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
+  // These last two should look familiar now :)
+  .pipe(gulp.dest('dist/css/'));
+});
+
+gulp.task('newsletter', function() {
+    return gulp.src('dist/newsletter.html')
+
+        .pipe(inlineCss({
+              applyStyleTags: true,
+              applyLinkTags: true,
+              removeStyleTags: true,
+              removeLinkTags: true
+        }))
+        .pipe(replace('./images/', 'http://myserver.com/newslettersimages/'))
+        .pipe(gulp.dest('newsletter/'));
+});
+
+
+
 gulp.task('watch', ['lint'], function() {
   // Start webserver
   server.listen(serverport);
@@ -139,7 +171,7 @@ gulp.task('watch', ['lint'], function() {
   ]);
   // Watch our sass files
   gulp.watch(['app/styles/**/*.scss'], [
-    'styles'
+    'styles', 'styles_newsletter'
   ]);
 
    gulp.watch(['app/fonts/**/*'], [
