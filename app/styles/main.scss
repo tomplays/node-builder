@@ -7,6 +7,8 @@ body{
     font-family: $font-stack;
 }
 
+@import 'bem';
+
 @media screen and (max-width: 720px) { 
     @import "small";
 }
