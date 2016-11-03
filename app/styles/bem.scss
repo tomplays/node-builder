@@ -22,9 +22,43 @@ $valid: green;
 }
 
 
+.form{
+    border: 1px solid #D5D5D5;
+    &--small {
+        font-size:0.9em;
+       
+    }
+
+    &__input {
+        border: 1px solid #D5D5D5; 
+
+        &--state-success {
+            color: $valid;
+        }
+    }
+}
+
+
+
+.nav {
+    border: 1px solid #D5D5D5;
+
+    &__list {
+    color: $valid;
+      &__item {
+      color: $danger;
+      }    
+    }
+  &__link {
+  color: $valid;
+    &--active { 
+     color: $valid;
+    }
+  }
+}
+
 
 .bem{
-    border: 1px solid #D5D5D5; 
     padding: 3%;
     
     &__box {
@@ -53,14 +87,7 @@ $valid: green;
     border: 1px solid #D5D5D5;
     @include e('box') {       
         border: 1px solid #D5D5D5;
-
-        /*
-        p{
-          
-            color:grey;
-        }
-        */
-        
+    
         @include m('state-success') {
             color: $valid;
             @include e('input') {              
