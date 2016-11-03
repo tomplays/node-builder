@@ -1,0 +1,79 @@
+@import 'bem-mixins';
+
+$danger: red;
+$valid: green;
+
+
+.block{
+    /* CSS declarations for `.block` */
+
+    &__element {
+        /* CSS declarations for `.block__element` */
+
+    }
+
+    &--modifier {
+        /* CSS declarations for `.block--modifier` */
+
+        &__element {
+            /* CSS declarations for `.block--modifier__element` */
+        }
+    }
+}
+
+
+
+.bem{
+    border: 1px solid #D5D5D5; 
+    padding: 3%;
+    
+    &__box {
+        border: 1px solid #D5D5D5;  
+            padding: 3%;
+   
+        &--state-success {
+            color: $valid;
+        }
+
+        &--state-danger {
+            color: $danger;
+        }
+
+    }
+   
+}
+
+
+
+
+// advanced example with aliases
+
+.bem--adv {
+    
+    border: 1px solid #D5D5D5;
+    @include e('box') {       
+        border: 1px solid #D5D5D5;
+
+        /*
+        p{
+          
+            color:grey;
+        }
+        */
+        
+        @include m('state-success') {
+            color: $valid;
+            @include e('input') {              
+              color: $valid;
+            }
+        }
+
+        @include m('state-danger') {         
+            color: red;
+            @include e('input') {
+                color: $danger;
+            }
+        }
+
+    }  
+}
